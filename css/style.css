@@ -1,0 +1,257 @@
+/* =========================================
+   기본 설정
+   ========================================= */
+:root {
+  --color-bg: #fafaf8;
+  --color-text: #1a1a1a;
+  --color-sub: #6b6b6b;
+  --color-accent: #1a1a1a;
+  --gutter: clamp(20px, 6vw, 80px);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  word-break: keep-all;          /* 한글 단어 단위 줄바꿈 */
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================
+   [효과 3] 상단 스크롤 진행률 프로그래스 바
+   - 너비 대신 scaleX로 변경해 리플로우 없이 부드럽게 동작
+   ========================================= */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 100;
+  background: transparent;
+}
+
+.progress__bar {
+  width: 100%;
+  height: 100%;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left center;   /* 왼쪽에서 오른쪽으로 채워짐 */
+  will-change: transform;
+}
+
+/* 히어로 위에서는 밝은 색으로 보이도록 */
+.progress.is-on-hero .progress__bar {
+  background: #fff;
+}
+
+/* =========================================
+   히어로 섹션
+   ========================================= */
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;                  /* 모바일 주소창 높이 대응 */
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--gutter);
+  overflow: hidden;
+  color: #fff;
+}
+
+/* [효과 2] 패럴랙스 배경
+   - 위아래로 여유 공간(inset 음수값)을 두어 이동 시 빈 공간이 보이지 않게 함 */
+.hero__bg {
+  position: absolute;
+  inset: -15% 0;
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.45) 100%);
+}
+
+.hero__content {
+  position: relative;
+  max-width: 720px;
+}
+
+.hero__title {
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+}
+
+.hero__text {
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* 스크롤 안내 아래 세로선 애니메이션 */
+.hero__scroll::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 40px;
+  margin: 10px auto 0;
+  background: #fff;
+  animation: scrollLine 2s var(--ease) infinite;
+  transform-origin: top;
+}
+
+@keyframes scrollLine {
+  0%   { transform: scaleY(0); opacity: 1; }
+  60%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+/* =========================================
+   콘텐츠 섹션
+   ========================================= */
+.section {
+  padding: clamp(100px, 18vw, 200px) var(--gutter);
+}
+
+.section__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  /* minmax(0, …): 이미지 원본 크기 때문에 칸이 화면 밖으로 넘치는 것 방지 */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: clamp(40px, 8vw, 120px);
+}
+
+.section__inner > * {
+  min-width: 0;
+}
+
+/* 섹션 2: 이미지와 텍스트 위치 반전 */
+.section--reverse .section__text {
+  order: 2;
+}
+
+.section__title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.section__desc {
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  color: var(--color-sub);
+}
+
+.section__media {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #e9e9e6;             /* 이미지 로딩 전 자리 표시 */
+}
+
+.footer {
+  padding: 60px var(--gutter);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-sub);
+}
+
+/* =========================================
+   [효과 1] 아래에서 위로 부드럽게 페이드인
+   - 기본: 투명 + 40px 아래에 위치
+   - .is-visible 이 붙으면 제자리로 올라오며 나타남
+   - --delay 값으로 제목 → 문장 → 이미지 순서로 시차 적용 (JS에서 지정)
+   ========================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 1s var(--ease),
+    transform 1s var(--ease);
+  transition-delay: var(--delay, 0s);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================
+   반응형 (태블릿 / 모바일)
+   ========================================= */
+@media (max-width: 768px) {
+  .section__inner {
+    grid-template-columns: minmax(0, 1fr);   /* 한 줄로 쌓기 */
+    gap: 40px;
+  }
+
+  /* 모바일에서는 모든 섹션을 텍스트 → 이미지 순서로 통일 */
+  .section--reverse .section__text {
+    order: 0;
+  }
+
+  .section__media {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* 좁은 화면에서는 강제 줄바꿈 해제 */
+  .section__desc br,
+  .hero__text br {
+    display: none;
+  }
+}
+
+/* 움직임 줄이기 설정 사용자 배려: 애니메이션 비활성화 */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero__scroll::after {
+    animation: none;
+  }
+}

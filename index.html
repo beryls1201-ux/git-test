@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scroll Interaction</title>
+
+  <!-- Pretendard 폰트 (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- [효과 3] 상단 스크롤 진행률 프로그래스 바 -->
+  <div class="progress" aria-hidden="true">
+    <div class="progress__bar"></div>
+  </div>
+
+  <!-- 히어로 섹션 -->
+  <header class="hero">
+    <!-- [효과 2] 패럴랙스 배경 이미지 (JS에서 스크롤에 따라 느리게 이동) -->
+    <div class="hero__bg"
+         style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2000&q=80');"></div>
+    <div class="hero__overlay"></div>
+
+    <div class="hero__content">
+      <!-- [효과 1] reveal 클래스가 붙은 요소는 아래에서 위로 페이드인 -->
+      <h1 class="hero__title reveal">Slow Down,<br />Look Closer</h1>
+      <p class="hero__text reveal">
+        빠르게 지나치던 풍경 속에도 머물 만한 순간이 있습니다.<br />
+        천천히 스크롤하며 하나씩 마주해 보세요.
+      </p>
+    </div>
+    <span class="hero__scroll" aria-hidden="true">Scroll</span>
+  </header>
+
+  <main>
+    <!-- 섹션 1 -->
+    <section class="section">
+      <div class="section__inner">
+        <div class="section__text">
+          <h2 class="section__title reveal">숲의 호흡</h2>
+          <p class="section__desc reveal">
+            나무 사이로 스며드는 빛은 언제나 조용합니다.<br />
+            소음이 사라진 자리에 비로소 생각이 자랍니다.
+          </p>
+        </div>
+        <figure class="section__media reveal">
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80"
+               alt="햇빛이 스며드는 푸른 숲" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- 섹션 2 (이미지 좌측 배치) -->
+    <section class="section section--reverse">
+      <div class="section__inner">
+        <div class="section__text">
+          <h2 class="section__title reveal">안개 너머</h2>
+          <p class="section__desc reveal">
+            모든 것이 선명할 필요는 없습니다.<br />
+            흐릿한 경계 속에서 상상은 더 멀리 나아갑니다.
+          </p>
+        </div>
+        <figure class="section__media reveal">
+          <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80"
+               alt="안개가 낀 언덕과 숲" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- 섹션 3 -->
+    <section class="section">
+      <div class="section__inner">
+        <div class="section__text">
+          <h2 class="section__title reveal">다시, 길 위로</h2>
+          <p class="section__desc reveal">
+            멈춰 섰던 시간은 다음 걸음을 위한 준비였습니다.<br />
+            이제 가벼운 마음으로 다시 떠나 볼까요.
+          </p>
+        </div>
+        <figure class="section__media reveal">
+          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80"
+               alt="해 질 녘 산과 들판 풍경" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 Scroll Interaction</footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
